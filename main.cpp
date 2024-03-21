@@ -34,7 +34,7 @@ int main() {
 
         window.ClearBackground(BLACK);
 
-        DrawText("Congrats! You created your first window!", 190 - player->GetPosition().GetX(), 200 - player->GetPosition().GetY(), 20, WHITE);
+        DrawText("Congrats! You created your first window!", 190 - cameraPos.x, 200 - cameraPos.y, 20, WHITE);
         DrawFPS(screenWidth - 100, 20);
 
         for(auto obj = gameObjects.begin(); obj < gameObjects.end(); obj++) {
