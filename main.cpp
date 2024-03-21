@@ -2,6 +2,7 @@
 #include <memory>
 #include <raylib-cpp.hpp>
 #include <Rocketeer/Util/IGameObject.hpp>
+#include <Rocketeer/Util/Math.hpp>
 #include <Rocketeer/Objects/Player.hpp>
 
 using namespace std;
@@ -17,21 +18,24 @@ int main() {
 
     raylib::Vector2 playerInit = { (float)(screenWidth/2 - player->GetWidth()), (float)(screenHeight/2 - player->GetHeight()) };
 
+    raylib::Vector2 cameraPos = { 0, 0 };
+
     player->SetPosition(playerInit);
 
     vector<Util::IGameObject*> gameObjects {
         player
     };
 
-    SetTargetFPS(120);
+    SetTargetFPS(165);
 
     while (!window.ShouldClose())
     {
         BeginDrawing();
 
-        window.ClearBackground(RAYWHITE);
+        window.ClearBackground(BLACK);
 
-        DrawText("Congrats! You created your first window!", 190 - player->GetPosition().GetX(), 200 - player->GetPosition().GetY(), 20, LIGHTGRAY);
+        DrawText("Congrats! You created your first window!", 190 - player->GetPosition().GetX(), 200 - player->GetPosition().GetY(), 20, WHITE);
+        DrawFPS(screenWidth - 100, 20);
 
         for(auto obj = gameObjects.begin(); obj < gameObjects.end(); obj++) {
             (*obj)->HandleInput();
@@ -42,8 +46,10 @@ int main() {
         }
 
         for(auto obj = gameObjects.begin(); obj < gameObjects.end(); obj++) {
-            (*obj)->Draw(player->GetPosition() - playerInit);
+            (*obj)->Draw(cameraPos);
         }
+
+        cameraPos = Util::Math::Lerp(cameraPos, player->GetPosition() - playerInit, 0.05);
 
         EndDrawing();
     }

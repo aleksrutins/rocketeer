@@ -1,21 +1,23 @@
 #include "Player.hpp"
 
+#define PLAYER_ACCEL 0.05
+
 using namespace Rocketeer::Objects;
 
 void Player::HandleInput()
 {
     if(IsKeyDown(KEY_W)) {
-        acceleration.y = -0.01;
+        acceleration.y = -PLAYER_ACCEL;
     } else if(IsKeyDown(KEY_S)) {
-        acceleration.y = 0.01;
+        acceleration.y = PLAYER_ACCEL;
     } else {
         acceleration.y = 0;
     }
 
     if(IsKeyDown(KEY_D)) {
-        acceleration.x = 0.01;
+        acceleration.x = PLAYER_ACCEL;
     } else if(IsKeyDown(KEY_A)) {
-        acceleration.x = -0.01;
+        acceleration.x = -PLAYER_ACCEL;
     } else {
         acceleration.x = 0;
     }

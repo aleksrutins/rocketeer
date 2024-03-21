@@ -39,7 +39,7 @@ add_executable(${PROJECT_NAME}
 
     src/Rocketeer/Objects/Player.cpp
     
-    src/Rocketeer/Util/IGameObject.cpp)
+    src/Rocketeer/Util/IGameObject.cpp "src/Rocketeer/Util/Math.cpp")
 
 target_link_libraries(${PROJECT_NAME} raylib)
 target_include_directories(${PROJECT_NAME} PRIVATE src)
